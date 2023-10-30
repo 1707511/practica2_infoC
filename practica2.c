@@ -40,19 +40,55 @@ void PrintVect(float vect[N], int from, int numel) {
 	       }
 	        printf("\n");
 	}
-//falta añadirle algo al row
 void PrintRow( float Mat[N][N], int row, int from, int numel ){
-	for(int i = from; i < from + numel; i++) {
-		                printf("%.2f ", vect[i]);
-				               }
-	                printf("\n");
-			        }
+        for(int i = from; i < from + numel; i++) {
+                 printf("%.2f ", Mat[row][i]);
+                                       }
+                  printf("\n");
+
+                        }
+void MultEscalar( float vect[N], float vectres[N], float alfa ){
+        for(int i = 0; i < N; i++) {
+
+                vectres[i] = alfa * vect[i];
+                 printf("%.2f ", vectres[i]);
+                }
+                 printf("\n");
+        }
+
+float Scalar( float vect1[N], float vect2[N] ){
+        for(int i = 0; i < N; i++) {
+
+                printf("%.2f ", (vect1[i] * vect2[i]));
+                                                 }
+                 printf("\n");
+                         }
+//no funciona bien, compila pero da un resultado raro
+float Magnitude( float vect[N] ){
+        float elevado = 0;
+        float sumatori = 0;
+        for(int i = 0; i < N; i++) {
+                elevado = pow(vect[i], 2);
+                sumatori = sumatori + elevado;
+                }
+        float modulo = pow(sumatori, (1/2));
+        printf("%.2f ",(modulo));
+        printf("\n");
+        }
+
 int main() {
-	float vector[N] = {1.0, 2.0, 3.0, 4.0, 5.0};
-	int from = 1;
-	int numel = 5;
-	int row = 1;
-	PrintVect(vector, from, numel);
-	PrintRow(Mat[N][N], row, from, numel);
+        float vector[N] = {1.0, 2.0, 3.0, 4.0, 5.0};
+        //int from = 1;
+        //int numel = 5;
+        //int row = 1;
+        float vect1[N] = {1.0, 2.0, 3.0, 4.0, 5.0};
+
+        float vectres[N];
+        float  Mat[N][N] = {{1.0, 2.0, 3.0},{1.0, 2.0, 3.0},{1.0, 2.0, 3.0}};
+        PrintVect(vector, 1, 4);
+        PrintRow(Mat, 2, 0, 2);
+        MultEscalar(vector, vectres, 2);
+        Scalar(vect1, vector);
+        Magnitude(vector);
 
 }
