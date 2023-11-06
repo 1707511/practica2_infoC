@@ -1,0 +1,73 @@
+int Jacobi(float A[N][N], float b[N], float x[N], unsigned iter, float epsilon) {
+    float x_new[N];
+    int i, j, k;
+
+    for (k = 0; k < iter; k++) {
+        for (i = 0; i < N; i++) {
+            x_new[i] = b[i];
+            for (j = 0; j < N; j++) {
+                if (i != j) {
+                    x_new[i] -= A[i][j] * x[j];
+                }
+            }
+            x_new[i] /= A[i][i];
+        }
+
+        float max_diff = 0;
+        for (i = 0; i < N; i++) {
+            if (fabs(x_new[i] - x[i]) > max_diff) {
+                max_diff = fabs(x_new[i] - x[i]);
+            }
+        }
+
+        if (max_diff < epsilon) {
+            for (i = 0; i < N; i++) {
+                x[i] = x_new[i];
+            }
+            return 1; // Convergencia alcanzada
+        }
+
+        for (i = 0; i < N; i++) {
+            x[i] = x_new[i];
+        }
+    }
+
+    return 0; // No se alcanzó la convergencia en el número de iteraciones especificado
+}
+
+
+
+
+
+//PARTE DEL MAIN//
+
+float X[N] = {0}; // Inicializar el vector de solución a 0
+
+unsigned iter1 = 1; // Primera iteración
+unsigned iter2 = 1000; // Segunda iteración
+float epsilon = 1e-6; // Umbral de convergencia
+
+// Resolver con 1 iteración
+Jacobi(MatDD, V3, X, iter1, epsilon);
+
+// Visualizar los primeros 10 elementos de la solución
+printf("Solución con 1 iteración:\n");
+for (int i = 0; i < 10; i++) {
+    printf("x%d = %.4f\n", i + 1, X[i]);
+}
+
+// Reinicializar el vector de solución
+for (int i = 0; i < N; i++) {
+    X[i] = 0;
+}
+
+// Resolver con 1000 iteraciones
+Jacobi(MatDD, V3, X, iter2, epsilon);
+
+// Visualizar los primeros 10 elementos de la solución
+printf("\nSolución con 1000 iteraciones:\n");
+for (int i = 0; i < 10; i++) {
+    printf("x%d = %.4f\n", i + 1, X[i]);
+}
+
+
