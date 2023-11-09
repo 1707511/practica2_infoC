@@ -1,0 +1,161 @@
+
+
+//Programa Principal
+int main() {
+        InitData();
+
+        //Comprovació A
+        printf("V1 del 0 al 9 i del 256 al 265:\n");
+        PrintVect(V1, 0, 9);
+        PrintVect(V1, 256, 265);
+        printf("\n");
+
+        printf("V2 del 0 al 9 i del 256 al 265:\n");
+        PrintVect(V2, 0, 9);
+        PrintVect(V2, 256, 265);
+        printf("\n");
+
+        printf("V3 del 0 al 9 i del 256 al 265:\n");
+        PrintVect(V3, 0, 9);
+        PrintVect(V3, 256, 265);
+        printf("\n");
+
+
+        //Comprovació B
+        printf("Mat fila 0 i fila 100 del 0 al 9:\n");
+        PrintRow(Mat, 0, 0, 9);
+        PrintRow(Mat, 100, 0, 9);
+        printf("\n");
+
+
+        //Comprovació C
+        printf("MatDD fila 0 i fila 100 del 0 al 9:\n");
+        PrintRow(MatDD, 0, 0, 9);
+        PrintRow(MatDD, 100, 95, 104);
+        printf("\n");
+
+
+        //Comprovación D
+        float norma_infMat = Infininorm(Mat);
+        printf("Infininorma de Mat = %.7f\n", norma_infMat);
+
+        float norma_unoMat = OneNorm(Mat);
+        printf("Norma ú de Mat = %.7f\n", norma_unoMat);
+
+        float norma_frobeniusMat = NormFrobenius(Mat);
+        printf("Norma de Frobenius de Mat = %.7f\n", norma_frobeniusMat);
+
+        if (DiagonalDom(Mat)) {
+                printf("La matriz Mat és diagonal dominant.\n");
+        } else {
+                printf("La matriz Mat no és diagonal dominant.\n");
+        }
+        printf("\n");
+
+        float norma_infMatDD = Infininorm(MatDD);
+        printf("Infininorma de MatDD = %.7f\n", norma_infMatDD);
+
+        float norma_unoMatDD = OneNorm(MatDD);
+        printf("Norma ú de MatDD = %.7f\n", norma_unoMatDD);
+
+        float norma_frobeniusMatDD = NormFrobenius(MatDD);
+        printf("Norma de Frobenius de MatDD = %.7f\n", norma_frobeniusMatDD);
+
+        if (DiagonalDom(MatDD)) {
+                printf("La matriz MatDD és diagonal dominant.\n");
+        } else {
+                printf("La matriz MatDD no és diagonal dominant.\n");
+        }
+        printf("\n");
+
+
+        //Comprovació E
+        printf("Escalar <V1,V2> = ");
+        Scalar(V1, V2);
+
+        printf("Escalar <V1,V3> = ");
+        Scalar(V1, V3);
+
+        printf("Escalar <V2,V3> = ");
+        Scalar(V2, V3);
+        printf("\n");
+
+        //Comprovació F
+        printf("Magnitud V1 = ");
+        Magnitude(V1);
+        printf("Magnitud V2 = ");
+        Magnitude(V2);
+        printf("Magnitud V3 = ");
+        Magnitude(V3);
+        printf("\n");
+
+
+        //Comprovació G
+        int ontogonal = Ortogonal(V1, V2);
+        if (ontogonal == 1){
+                printf("V1 i V2 són ontogonals\n");
+        }
+        if (ontogonal == 0){
+                printf("V1 i V2 no són ontogonals\\n");
+        }
+        printf("\n");
+
+
+        //Comprovació H
+        float V3x2[N];
+        MultEscalar(V3, V3x2, 2.0);
+        printf("Els elements 0 al 9 i 256 al 265 del resultat de multiplicar V3x2.0 són:\n");
+        PrintVect(V3x2, 0, 9);
+        PrintVect(V3x2, 256, 265);
+        printf("\n");
+
+        //Comprovació I
+        float vector_proyeccion[N];
+
+        printf("Els elements 0 a 9 del resultat de la projecció de V1 sobre V2 són:");
+        Projection(V1, V2, vector_proyeccion);
+        printf("\n");
+        for (int i = 0; i < 10; i++) {
+                printf("%.7f ", vector_proyeccion[i]);
+                        }
+        printf("\n");
+
+        printf("Els elements 0 a 9 del resultat de la projecció de V2 sobre V3 són:");
+        Projection(V2, V3, vector_proyeccion);
+        printf("\n");
+        for (int i = 0; i < 10; i++) {
+                printf("%.7f ", vector_proyeccion[i]);
+                        }
+        printf("\n");
+        printf("\n");
+
+        //Comprovació J
+        float solucio1[N];
+         int result1 = Jacobi(MatDD, V3, solucio1, 2);
+
+        if (result1) {
+                printf("Resultado de Jacobi:\n");
+                PrintVect(solucio1, 0, 9);
+                //for (int i = 0; i < N; i++) {
+                //      printf("%f\n",solucio1[i]);
+                //}
+        } else {
+                printf("La matriz no es diagonalmente dominante, no se puede aplicar Jacobi.\n");
+        }
+
+        float solucio1000[N];
+        int result1000 = Jacobi(MatDD, V3, solucio1000, 1001);
+
+        if (result1000) {
+                printf("Resultado de Jacobi:\n");
+                PrintVect(solucio1000, 0, 9);
+                //for (int i = 0; i < N; i++) {
+                //      printf("%f\n",solucio1000[i]);
+                //}
+        } else {
+                printf("La matriz no es diagonalmente dominante, no se puede aplicar Jacobi.\n");
+        }
+
+}
+
+~             
